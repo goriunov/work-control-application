@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c67343a-cdf6-4868-81a9-81bbffce08de" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/registration-authorization.js" afterPath="$PROJECT_DIR$/routes/registration-authorization.js" />
     </list>
     <ignored path="JobServer.iws" />
@@ -69,7 +69,7 @@
       <file leaf-file-name="registration-authorization.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/registration-authorization.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="240">
               <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
               <folding />
             </state>
@@ -260,12 +260,12 @@
       <workItem from="1478997807815" duration="3444000" />
       <workItem from="1479001807046" duration="987000" />
       <workItem from="1479086370709" duration="348000" />
-      <workItem from="1479097631693" duration="3657000" />
+      <workItem from="1479097631693" duration="3833000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8436000" />
+    <option name="totallyTimeSpent" value="8612000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="102" y="23" width="1264" height="745" extended-state="0" />
@@ -502,7 +502,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/registration-authorization.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
+        <state relative-caret-position="240">
           <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
           <folding />
         </state>
