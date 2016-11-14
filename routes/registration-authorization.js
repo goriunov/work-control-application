@@ -21,28 +21,34 @@ router.post('/registration' , function(req, res ,next){
             });
         }
         return res.status(200).json({
-            message: 'Success registration !'
+            message: 'Successful registration !'
         });
     });
 });
 
 router.post('/sign-in', function(req , res ,next){
     User.findOne({'email': req.body.email} , function(err , response){
-        if(response.password != req.body.password){
-            return res.status(403).json({
-                message: 'Some thing went wrong !',
-                err: 'Wrong password or email'
-            });
-        }
         if(err){
             return res.status(400).json({
                 message: 'Some thing went wrong !',
                 err: err
             });
         }
+        if(response == null){
+            return res.status(403).json({
+                message: 'Some thing went wrong !',
+                err: 'Wrong password or email'
+            });
+        }
+        if(response.password != req.body.password){
+            return res.status(403).json({
+                message: 'Some thing went wrong !',
+                err: 'Wrong password or email'
+            });
+        }
         var token = jwt.sign( {doc: response},'superSecretForNow');
         return res.status(200).json({
-            message: 'Success Authorization !',
+            message: 'Successful Authorization !',
             user: response,
             token: token
         });
