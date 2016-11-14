@@ -5,15 +5,15 @@ var jwt = require('jsonwebtoken');
 
 
 router.post('/registration' , function(req, res ,next){
-    var phoneNumber = req.body.phoneNumber;
-
-    if(typeof req.body.phoneNumber == "string"){
-        phoneNumber = parseInt(req.body.phoneNumber , 10);
-    }
+    console.log(req.body.email);
+    console.log(req.body.password);
+    console.log(req.body.phoneNumber);
+    console.log(req.body.firstName);
+    console.log(req.body.lastName);
     var user = new User({
         'email': req.body.email,
         'password': req.body.password,
-        'phoneNumber': phoneNumber,
+        'phoneNumber': req.body.phoneNumber,
         'firstName': req.body.firstName,
         'lastName': req.body.lastName
     });
