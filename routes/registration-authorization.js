@@ -20,7 +20,7 @@ router.post('/registration' , function(req, res ,next){
 
     user.save(function(err , response){
         if(err){
-            return res.status(400).json({
+            return res.status(401).json({
                 message: 'Some thing went wrong !',
                 err: err
             });
