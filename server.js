@@ -2,12 +2,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var compressor = require('compression');
 var mongoose = require('mongoose');
+var config = require('./main-config/main-config')
 
 var app = express();
 var main  = require('./routes/index');
 var reg_auth = require('./routes/registration-authorization');
 
-mongoose.connect('linker:linker154263@ds044679.mlab.com:44679/linker');
+mongoose.connect(config.dbUserName +':'+config.dbPassword+'@ds044679.mlab.com:44679/linker');
 mongoose.Promise = global.Promise;
 
 app.use(compressor());

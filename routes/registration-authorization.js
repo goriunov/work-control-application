@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../mongoose_model/user');
 var jwt = require('jsonwebtoken');
 var passwordHash = require('password-hash');
+var config = require('../main-config/main-config');
 
 
 router.post('/registration' , function(req, res ,next){
@@ -48,7 +49,7 @@ router.post('/sign-in', function(req , res ,next){
                 err: 'Wrong password or email'
             });
         }
-        var token = jwt.sign( {doc: response},'superSecretForNow');
+        var token = jwt.sign( {doc: response}, config.jwtSecret);
         return res.status(200).json({
             message: 'Successful Authorization !',
             admin: response.admin,
@@ -59,15 +60,15 @@ router.post('/sign-in', function(req , res ,next){
 });
 
 router.get('/if-online' , function(req ,res ,next){
-    jwt.verify(req.query.token , 'superSecretForNow' , function(err , response){
+    jwt.verify(req.query.token , config.jwtSecret , function(err , response){
         if(err) {
-            return res.status(400).json({
-                message: 'Some thing went wrong !',
+            return res.status(403).json({
+                message: 'Token is not authorized',
                 err: err
             });
         }
         return res.status(200).json({
-            message: 'Successful Authorization !',
+            message: 'Successful',
             admin: response.doc.admin
         });
     });
