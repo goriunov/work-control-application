@@ -58,5 +58,26 @@ router.post('/sign-in', function(req , res ,next){
 
 });
 
+router.get('/if-online' , function(req ,res ,next){
+    jwt.verify(req.query.token , 'superSecretForNow' , function(err , response){
+        if(err) {
+            return res.status(400).json({
+                message: 'Some thing went wrong !',
+                err: err
+            });
+        }
+        if(response == null){
+            return res.status(403).json({
+                message: 'Not authorize',
+                err: 'Not authorize'
+            });
+        }
+        return res.status(200).json({
+            message: 'Successful Authorization !',
+            admin: response.admin
+        });
+    });
+});
+
 
 module.exports = router;
