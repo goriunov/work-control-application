@@ -51,7 +51,7 @@ router.post('/sign-in', function(req , res ,next){
         var token = jwt.sign( {doc: response},'superSecretForNow');
         return res.status(200).json({
             message: 'Successful Authorization !',
-            user: response,
+            admin: response.admin,
             token: token
         });
     });
