@@ -3,10 +3,8 @@ var router = express.Router();
 
 
 router.get('/' , function(req ,res ,next){
-    console.log('Connected');
-    res.write('In work');
+    res.write('Website is in Work');
     res.end();
-
 });
 
 

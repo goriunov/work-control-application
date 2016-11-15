@@ -11,7 +11,8 @@ router.post('/registration' , function(req, res ,next){
         'password': passwordHash.generate(req.body.password),
         'phoneNumber': req.body.phoneNumber,
         'firstName': req.body.firstName,
-        'lastName': req.body.lastName
+        'lastName': req.body.lastName,
+        'admin': false
     });
 
     user.save(function(err , response){
