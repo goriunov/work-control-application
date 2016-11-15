@@ -68,7 +68,7 @@ router.get('/if-online' , function(req ,res ,next){
         }
         return res.status(200).json({
             message: 'Successful Authorization !',
-            admin: response
+            admin: response.doc.admin
         });
     });
 });
