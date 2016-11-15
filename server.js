@@ -8,7 +8,7 @@ var app = express();
 var main  = require('./routes/index');
 var reg_auth = require('./routes/registration-authorization');
 
-mongoose.connect(config.dbUserName +':'+config.dbPassword+'@ds044679.mlab.com:44679/linker');
+mongoose.connect(config.dbUserName +':'+ config.dbPassword + '@ds044679.mlab.com:44679/linker');
 mongoose.Promise = global.Promise;
 
 app.use(compressor());
