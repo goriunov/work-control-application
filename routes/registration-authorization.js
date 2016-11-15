@@ -66,15 +66,9 @@ router.get('/if-online' , function(req ,res ,next){
                 err: err
             });
         }
-        if(response == null){
-            return res.status(403).json({
-                message: 'Not authorize',
-                err: 'Not authorize'
-            });
-        }
         return res.status(200).json({
             message: 'Successful Authorization !',
-            admin: response.admin
+            admin: response.doc.admin
         });
     });
 });
