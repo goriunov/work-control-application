@@ -2,7 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var compressor = require('compression');
 var mongoose = require('mongoose');
-var config = require('./main-config/main-config')
+var config = require('./main-config/main-config');
+var path = require('path');
 
 var app = express();
 var main  = require('./routes/index');
@@ -13,6 +14,8 @@ mongoose.connect(config.dbUserName +':'+ config.dbPassword + '@ds044679.mlab.com
 mongoose.Promise = global.Promise;
 
 app.use(compressor());
+
+app.use(express.static(path.join(__dirname , 'app-front-end/dist')))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

@@ -1,0 +1,13 @@
+<form [formGroup]="myForm" (submit)="onSubmit()" class="col-xs-12">
+  <fieldset class="form-group">
+    <label for="email">Email</label>
+    <input formControlName="email" class="form-control" id="email" type="email" placeholder="email">
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="password">Password</label>
+    <input formControlName="password" class="form-control" id="password" type="password" placeholder="password">
+  </fieldset>
+  <fieldset class="button-control">
+    <button class="btn btn-primary" [disabled]="!myForm.valid">Sign in</button>
+  </fieldset>
+</form>
