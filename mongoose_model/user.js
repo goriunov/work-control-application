@@ -8,7 +8,8 @@ var user = new Schema({
     'phoneNumber': {type: Number , required: true},
     'firstName': {type: String , required: true},
     'lastName':{type: String , required :true},
-    'admin': {type: Boolean , required: true}
+    'admin': {type: Boolean , required: true},
+    'timeTable': [{type: Schema.Types.ObjectId , ref: 'TimeTable' }]
 });
 
 

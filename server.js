@@ -7,6 +7,7 @@ var config = require('./main-config/main-config')
 var app = express();
 var main  = require('./routes/index');
 var reg_auth = require('./routes/registration-authorization');
+var account = require('./routes/distribute');
 
 mongoose.connect(config.dbUserName +':'+ config.dbPassword + '@ds044679.mlab.com:44679/linker');
 mongoose.Promise = global.Promise;
@@ -31,6 +32,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/user' , reg_auth);
+app.use('/account' , account);
 app.use('/' , main);
 
 
