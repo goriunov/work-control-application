@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {User} from "./user";
+import {User} from "../../shared/user";
 import 'rxjs/Rx';
 import {Http, Headers} from "@angular/http";
 @Injectable()

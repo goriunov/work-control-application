@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {AuthenticationService} from "../shared/authentication.service";
-import {User} from "../shared/user";
+import {User} from "../../shared/user";
 
 @Component({
   selector: "my-signin",

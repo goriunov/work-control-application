@@ -4,6 +4,7 @@ body{
   height: 100%;
   width: 100%;
   z-index: -100;
+  min-height: 530px;
   background: url("/assets/pictures/background.jpg") no-repeat center center fixed;
   background-size: cover;
 }
