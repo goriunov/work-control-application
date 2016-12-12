@@ -39,46 +39,40 @@ router.get('/time-table' , function(req ,res ,next){
 router.post('/new-time-table' , function(req ,res  ,next){
     var user = jwt.decode(req.query.token);
 
-    var timeTable = new TimeTable({
-        'weekDay': req.body.weekDay,
-        'date': req.body.date,
-        'startTime' : req.body.startTime,
-        'endTime': req.body.endTime,
-        'month': req.body.month,
-        'salary': req.body.salary,
-        'user': user.doc._id
-    });
-
-    timeTable.save(function (err , response) {
+    User.findById(user.doc._id , function(err , userInfo){
         if(err){
             return res.status(403).json({
-                message: "Error, can not save",
+                message: "Error occurred",
                 err: err
             });
         }
 
-        User.findById(user.doc._id , function(err , userInfo){
+        var timeTable = new TimeTable({
+            'weekDay': req.body.weekDay,
+            'date': req.body.date,
+            'startTime' : req.body.startTime,
+            'endTime': req.body.endTime,
+            'month': req.body.month,
+            'salary': req.body.salary,
+            'user': user.doc._id
+        });
+
+        timeTable.save(function (err , response) {
             if(err){
                 return res.status(403).json({
-                    message: "Error occurred",
+                    message: "Error, can not save",
                     err: err
                 });
             }
-            userInfo.timeTable = response;
-            userInfo.save(function(err , res){
-                if(err){
-                    return res.status(403).json({
-                        message: "Error occurred",
-                        err: err
-                    });
-                }
-                return res.status(200).json({
-                    message: "Success"
-                });
+            userInfo.timeTable.push(response);
+            userInfo.save();
+            return res.status(200).json({
+                message: "Success"
             });
-
         });
-    })
+    });
+
+
 });
 
 module.exports = router;
