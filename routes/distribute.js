@@ -40,7 +40,7 @@ router.post('/new-time-table' , function(req ,res  ,next){
     var user = jwt.decode(req.query.token);
 
     var timeTable = new TimeTable({
-        'weekDay': req.body.day,
+        'weekDay': req.body.weekDay,
         'date': req.body.date,
         'startTime' : req.body.startTime,
         'endTime': req.body.endTime,
