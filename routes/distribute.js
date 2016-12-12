@@ -51,7 +51,7 @@ router.post('/new-time-table' , function(req ,res  ,next){
 
     timeTable.save(function (err , response) {
         if(err){
-            return res.status(200).json({
+            return res.status(403).json({
                 message: "Error, can not save",
                 err: err
             });
@@ -65,9 +65,18 @@ router.post('/new-time-table' , function(req ,res  ,next){
                 });
             }
             userInfo.timeTable = response;
-            return res.status(200).json({
-                message: "Success"
+            userInfo.save(function(err , res){
+                if(err){
+                    return res.status(403).json({
+                        message: "Error occurred",
+                        err: err
+                    });
+                }
+                return res.status(200).json({
+                    message: "Success"
+                });
             });
+
         });
     })
 });
