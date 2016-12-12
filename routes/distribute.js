@@ -51,7 +51,7 @@ router.post('/new-time-table' , function(req ,res  ,next){
 
     timeTable.save(function (err , response) {
         if(err){
-            return res.status(403).json({
+            return res.status(200).json({
                 message: "Error, can not save",
                 err: err
             });
