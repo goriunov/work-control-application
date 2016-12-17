@@ -1,8 +1,9 @@
+
 var express = require("express");
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var config = require('../main-config/main-config');
-var User = require('../mongoose_model/user');
+var User = require('../mongoose_model/user');// jscs:ignore
 var TimeTable = require('../mongoose_model/timetabel');
 
 router.use(function(req ,res ,next){
@@ -71,8 +72,46 @@ router.post('/new-time-table' , function(req ,res  ,next){
             });
         });
     });
-
-
 });
+
+router.get('/single/:id' , function(req ,res ,next){
+    TimeTable.findById(req.params.id , function(err , response){
+        if(err){
+            return res.status(404).json({
+                message: "Error, not found",
+                err: err
+            });
+        };
+        return res.status(200).json({
+            message: "Success",
+            doc: response
+        });
+    });
+});
+
+router.post('/update' , function(req , res ,next){
+    TimeTable.findById(req.body._id , function(err , response){
+        response.weekDay = req.body.weekDay;
+        response.date = req.body.date;
+        response.startTime = req.body.startTime;
+        response.endTime = req.body.endTime;
+        response.month = req.body.month;
+        response.salary = req.body.salary;
+
+        response.save(function(err ,done){
+            if(err){
+                return res.status(403).json({
+                    message: "Error, couuld not save",
+                    err: err
+                });
+            };
+            return res.status(200).json({
+                message: "Success"
+            });
+        });
+    })
+});
+
+
 
 module.exports = router;
