@@ -45,7 +45,7 @@ router.get('/time-table' , function(req ,res ,next){
             }
             return res.status(200).json({
                 message: "Success",
-                user: result
+                user: userTimeTable
             })
         });
 });
