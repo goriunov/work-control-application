@@ -3,8 +3,13 @@ var express = require("express");
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var config = require('../main-config/main-config');
-var User = require('../mongoose_model/user');// jscs:ignore
+var User = require('../mongoose_model/user');
 var TimeTable = require('../mongoose_model/timetabel');
+
+
+
+
+
 
 router.use(function(req ,res ,next){
     jwt.verify(req.query.token , config.jwtSecret , function(err ,response){
@@ -20,9 +25,18 @@ router.use(function(req ,res ,next){
 
 router.get('/time-table' , function(req ,res ,next){
     var user = jwt.decode(req.query.token);
+    var allMonth = ['January' , 'February' , 'March' , 'April' , 'May','June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December']
+    var userTimeTable=[];
     User.findById(user.doc._id)
         .populate('timeTable')
         .exec(function(err ,result){
+            for(var i = 0; i < 12; i++){
+                for(var j=0; j < result.timeTable.length; j++){
+                    if(result.timeTable[j].month == allMonth[i]){
+                        userTimeTable.push(result.timeTable[j]);
+                    }
+                }
+            }
             if(err){
                 return res.status(500).json({
                     message: "You are not authorized",
@@ -34,8 +48,8 @@ router.get('/time-table' , function(req ,res ,next){
                 user: result
             })
         });
-
 });
+
 
 router.post('/new-time-table' , function(req ,res  ,next){
     var user = jwt.decode(req.query.token);
