@@ -25,11 +25,10 @@ router.get('/time-table' , function(req ,res ,next){
     var user = jwt.decode(req.query.token);
     var allMonth = ['January' , 'February' , 'March' , 'April' , 'May', 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December']
     var userTimeTable=[];
-    var dateSort =[];
 
     // User.findById('584b6488c5c4f66558a314c3')
 
-    User.findById(user.doc._id)
+    User.findById(user.docID)
         .populate('timeTable')
         .exec(function(err ,result){
             for(var i = allMonth.length-1; i>=0 ; i--){
@@ -62,7 +61,7 @@ router.get('/time-table' , function(req ,res ,next){
 router.post('/new-time-table' , function(req ,res  ,next){
     var user = jwt.decode(req.query.token);
 
-    User.findById(user.doc._id , function(err , userInfo){
+    User.findById(user.docId, function(err , userInfo){
         if(err){
             return res.status(403).json({
                 message: "Error occurred",
@@ -77,7 +76,7 @@ router.post('/new-time-table' , function(req ,res  ,next){
             'endTime': req.body.endTime,
             'month': req.body.month,
             'salary': req.body.salary,
-            'user': user.doc._id
+            'user': user.docID
         });
 
         timeTable.save(function (err , response) {

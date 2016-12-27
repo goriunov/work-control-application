@@ -49,7 +49,7 @@ router.post('/sign-in', function(req , res ,next){
                 err: 'Wrong password or email'
             });
         }
-        var token = jwt.sign( {doc: response}, config.jwtSecret);
+        var token = jwt.sign( {docID: response._id}, config.jwtSecret);
         return res.status(200).json({
             message: 'Successful Authorization !',
             admin: response.admin,
