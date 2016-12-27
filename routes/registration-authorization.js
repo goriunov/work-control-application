@@ -49,7 +49,7 @@ router.post('/sign-in', function(req , res ,next){
                 err: 'Wrong password or email'
             });
         }
-        var token = jwt.sign( {docID: response._id}, config.jwtSecret);
+        var token = jwt.sign( {docID: response._id , admin: response.admin}, config.jwtSecret);
         return res.status(200).json({
             message: 'Successful Authorization !',
             admin: response.admin,
@@ -69,7 +69,7 @@ router.get('/if-online' , function(req ,res ,next){
         }
         return res.status(200).json({
             message: 'Successful',
-            admin: response.doc.admin
+            admin: response.admin
         });
     });
 });
