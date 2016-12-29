@@ -61,7 +61,7 @@ router.get('/time-table' , function(req ,res ,next){
 router.post('/new-time-table' , function(req ,res  ,next){
     var user = jwt.decode(req.query.token);
 
-    User.findById(user.docId, function(err , userInfo){
+    User.findById(user.docID, function(err , userInfo){
         if(err){
             return res.status(403).json({
                 message: "Error occurred",
