@@ -45,7 +45,7 @@ router.get('/time-table' , function(req ,res ,next){
                     year -= y;
                     for (var i = allMonth.length - 1; i >= 0; i--) {
                         for (var l = 31; l >= 1; l--) {
-                            for (var j = 0; j < result.timeTable.length; j++) {
+                            for (var j = result.timeTable.length-1; j >= 0; j--) {
                                 if (year == result.timeTable[j].year) {
                                     if (result.timeTable[j].month == allMonth[i] && parseInt(result.timeTable[j].date.substring(0, 2)) == l) {
                                         userTimeTable.push(result.timeTable[j]);
