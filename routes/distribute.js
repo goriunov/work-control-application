@@ -4,7 +4,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var config = require('../main-config/main-config');
 var User = require('../mongoose_model/user');
-var TimeTable = require('../mongoose_model/timetabel');
+var TimeTable = require('../mongoose_model/timetable');
 
 
 
@@ -26,12 +26,13 @@ router.get('/time-table' , function(req ,res ,next){
     var allMonth = ['January' , 'February' , 'March' , 'April' , 'May', 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December']
     var userTimeTable=[];
 
-    // User.findById('584b6488c5c4f66558a314c3')
+    // User.findById('58686a5d6c800c30d8e07bc2')
 
     User.findById(user.docID)
         .populate('timeTable')
         .exec(function(err ,result){
-            var year = result.timeTable[0].year;
+            console.log(result);
+            var year = parseInt(result.timeTable[0].year);
 
             for(var i = 0 ; i = result.timeTable.length ; i++){
                 if(result.timeTable[i].year > year){
@@ -39,7 +40,7 @@ router.get('/time-table' , function(req ,res ,next){
                 }
             }
             for(var y = 0 ; y < 2; y++) {
-                year = year - y;
+                year -= y;
                 for (var i = allMonth.length - 1; i >= 0; i--) {
                     for (var l = 31; l <= 1; l--) {
                         for (var j = 0; j < result.timeTable.length; j++) {
@@ -100,10 +101,18 @@ router.post('/new-time-table' , function(req ,res  ,next){
                 });
             }
             userInfo.timeTable.push(response);
-            userInfo.save();
-            return res.status(200).json({
-                message: "Success"
+            userInfo.save(function(err , response){
+                if(err){
+                    return res.status(403).json({
+                        message: "Error, can not save",
+                        err: err
+                    });
+                }
+                return res.status(200).json({
+                    message: "Success"
+                });
             });
+
         });
     });
 });
