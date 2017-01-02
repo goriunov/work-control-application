@@ -26,7 +26,7 @@ router.get('/time-table' , function(req ,res ,next){
     var allMonth = ['January' , 'February' , 'March' , 'April' , 'May', 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December']
     var userTimeTable=[];
 
-    // User.findById('58686a5d6c800c30d8e07bc2')
+    // User.findById('586a443ca90133249cffbbe1')
 
     User.findById(user.docID)
         .populate('timeTable')
@@ -34,8 +34,9 @@ router.get('/time-table' , function(req ,res ,next){
             console.log(result);
             if(result.timeTable) {
                 var year = parseInt(result.timeTable[0].year);
+                console.log(year);
 
-                for (var i = 0; i = result.timeTable.length; i++) {
+                for (var i = 0; i < result.timeTable.length; i++) {
                     if (result.timeTable[i].year > year) {
                         year = result.timeTable[i].year;
                     }
@@ -43,7 +44,7 @@ router.get('/time-table' , function(req ,res ,next){
                 for (var y = 0; y < 2; y++) {
                     year -= y;
                     for (var i = allMonth.length - 1; i >= 0; i--) {
-                        for (var l = 31; l <= 1; l--) {
+                        for (var l = 31; l >= 1; l--) {
                             for (var j = 0; j < result.timeTable.length; j++) {
                                 if (year == result.timeTable[j].year) {
                                     if (result.timeTable[j].month == allMonth[i] && parseInt(result.timeTable[j].date.substring(0, 2)) == l) {
@@ -53,9 +54,6 @@ router.get('/time-table' , function(req ,res ,next){
                             }
                         }
                     }
-                }
-                for (var j = 0; j < userTimeTable.length; j++) {
-                    console.log(userTimeTable[j].date)
                 }
             }else{
                 userTimeTable = [];
