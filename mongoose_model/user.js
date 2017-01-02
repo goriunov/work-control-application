@@ -9,6 +9,7 @@ var user = new Schema({
     'firstName': {type: String , required: true},
     'lastName':{type: String , required :true},
     'admin': {type: Boolean , required: true},
+    'rate': {type: String, required: true},
     'break': {type: String},
     'timeTable': [{type: Schema.Types.ObjectId , ref: 'TimeTable' }]
 });
