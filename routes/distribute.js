@@ -32,29 +32,33 @@ router.get('/time-table' , function(req ,res ,next){
         .populate('timeTable')
         .exec(function(err ,result){
             console.log(result);
-            var year = parseInt(result.timeTable[0].year);
+            if(result.timeTable) {
+                var year = parseInt(result.timeTable[0].year);
 
-            for(var i = 0 ; i = result.timeTable.length ; i++){
-                if(result.timeTable[i].year > year){
-                    year = result.timeTable[i].year;
+                for (var i = 0; i = result.timeTable.length; i++) {
+                    if (result.timeTable[i].year > year) {
+                        year = result.timeTable[i].year;
+                    }
                 }
-            }
-            for(var y = 0 ; y < 2; y++) {
-                year -= y;
-                for (var i = allMonth.length - 1; i >= 0; i--) {
-                    for (var l = 31; l <= 1; l--) {
-                        for (var j = 0; j < result.timeTable.length; j++) {
-                            if(year == result.timeTable[j].year) {
-                                if (result.timeTable[j].month == allMonth[i] && parseInt(result.timeTable[j].date.substring(0, 2)) == l) {
-                                    userTimeTable.push(result.timeTable[j]);
+                for (var y = 0; y < 2; y++) {
+                    year -= y;
+                    for (var i = allMonth.length - 1; i >= 0; i--) {
+                        for (var l = 31; l <= 1; l--) {
+                            for (var j = 0; j < result.timeTable.length; j++) {
+                                if (year == result.timeTable[j].year) {
+                                    if (result.timeTable[j].month == allMonth[i] && parseInt(result.timeTable[j].date.substring(0, 2)) == l) {
+                                        userTimeTable.push(result.timeTable[j]);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            for(var j=0; j < userTimeTable.length; j++){
-                console.log(userTimeTable[j].date)
+                for (var j = 0; j < userTimeTable.length; j++) {
+                    console.log(userTimeTable[j].date)
+                }
+            }else{
+                userTimeTable = [];
             }
 
             if(err){
