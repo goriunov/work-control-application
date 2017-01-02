@@ -13,6 +13,7 @@ router.post('/registration' , function(req, res ,next){
         'phoneNumber': req.body.phoneNumber,
         'firstName': req.body.firstName,
         'lastName': req.body.lastName,
+        'break': '30',
         'admin': false
     });
 
@@ -45,7 +46,7 @@ router.post('/sign-in', function(req , res ,next){
         }
         if(!passwordHash.verify(req.body.password , response.password)){
             return res.status(403).json({
-                message: 'Some thing went wrong !',
+                message: 'Some thing went wr,ong !',
                 err: 'Wrong password or email'
             });
         }
@@ -53,6 +54,7 @@ router.post('/sign-in', function(req , res ,next){
         return res.status(200).json({
             message: 'Successful Authorization !',
             admin: response.admin,
+            user: response,
             token: token
         });
     });
