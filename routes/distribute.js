@@ -31,11 +31,23 @@ router.get('/time-table' , function(req ,res ,next){
     User.findById(user.docID)
         .populate('timeTable')
         .exec(function(err ,result){
-            for(var i = allMonth.length-1; i>=0 ; i--){
-                for(var l = 1; l <= 31 ; l++){
-                    for(var j=0; j < result.timeTable.length; j++) {
-                        if (result.timeTable[j].month == allMonth[i] &&  parseInt(result.timeTable[j].date.substring(0,2)) == l) {
-                            userTimeTable.push(result.timeTable[j]);
+            var year = result.timeTable[0].year;
+
+            for(var i = 0 ; i = result.timeTable.length ; i++){
+                if(result.timeTable[i].year > year){
+                    year = result.timeTable[i].year;
+                }
+            }
+            for(var y = 0 ; y < 2; y++) {
+                year = year - y;
+                for (var i = allMonth.length - 1; i >= 0; i--) {
+                    for (var l = 31; l <= 1; l--) {
+                        for (var j = 0; j < result.timeTable.length; j++) {
+                            if(year == result.timeTable[j].year) {
+                                if (result.timeTable[j].month == allMonth[i] && parseInt(result.timeTable[j].date.substring(0, 2)) == l) {
+                                    userTimeTable.push(result.timeTable[j]);
+                                }
+                            }
                         }
                     }
                 }
@@ -76,6 +88,7 @@ router.post('/new-time-table' , function(req ,res  ,next){
             'endTime': req.body.endTime,
             'month': req.body.month,
             'salary': req.body.salary,
+            'year': req.body.year,
             'user': user.docID
         });
 
@@ -118,6 +131,7 @@ router.post('/update' , function(req , res ,next){
         response.endTime = req.body.endTime;
         response.month = req.body.month;
         response.salary = req.body.salary;
+        response.year = req.body.year;
 
         response.save(function(err ,done){
             if(err){

@@ -8,6 +8,7 @@ var timeTable = new Schema({
     'startTime' : {type : String , required: true},
     'endTime': {type: String , required: true},
     'month': {type: String , required: true},
+    'year': {type: String , required: true},
     'salary': {type: String , required: true},
     'user': {type: Schema.Types.ObjectId , ref: 'temp_user'}
 });
