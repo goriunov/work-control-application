@@ -26,13 +26,12 @@ router.get('/time-table' , function(req ,res ,next){
     var allMonth = ['January' , 'February' , 'March' , 'April' , 'May', 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December']
     var userTimeTable=[];
 
-    // User.findById('586a443ca90133249cffbbe1')
+    // User.findById('586b251e7572f818fcd43c83')
 
     User.findById(user.docID)
         .populate('timeTable')
         .exec(function(err ,result){
-            console.log(result);
-            if(result.timeTable) {
+            if(result.timeTable.length > 0) {
                 var year = parseInt(result.timeTable[0].year);
                 console.log(year);
 
