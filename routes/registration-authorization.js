@@ -15,7 +15,7 @@ router.post('/registration' , function(req, res ,next){
         'lastName': req.body.lastName,
         'break': '30',
         'rate': '15',
-        'admin': false
+        'admin': true
     });
 
     user.save(function(err , response){
