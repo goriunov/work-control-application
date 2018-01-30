@@ -17,7 +17,7 @@ router.use(function(req ,res ,next){
                 err: err
             });
         }
-        next();
+        next()
     });
 });
 
